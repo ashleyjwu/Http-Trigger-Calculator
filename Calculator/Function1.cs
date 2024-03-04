@@ -21,21 +21,40 @@ namespace Calculator
 
             string numX = req.Query["x"];
             string numY = req.Query["y"];
+            string operand = req.Query["Operator"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             numX = numX ?? data?.x;
             numY = numY ?? data?.y;
+            operand = operand ?? data?.Operator;
 
-            int x = int.Parse(numX);
-            int y = int.Parse(numY);
+            float x = float.Parse(numX);
+            float y = float.Parse(numY);
 
-            /*string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-            */
+            string responseMessage = "";
 
-            string responseMessage = (x+y).ToString();
+            if (operand.Equals("+"))
+            {
+                responseMessage = (x + y).ToString();
+            }
+            else if(operand.Equals("-"))
+            {
+                responseMessage = (x - y).ToString();
+            }
+            else if(operand.Equals("*"))
+            {
+                responseMessage = (x * y).ToString();
+            }
+            else if (operand.Equals("/"))
+            {
+                responseMessage = (x/y).ToString();
+            }
+            else 
+            {
+                responseMessage = "Incorrect operator assignment";
+            }
+            
             return new OkObjectResult(responseMessage);
         }
     }
