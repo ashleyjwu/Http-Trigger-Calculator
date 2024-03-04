@@ -34,26 +34,29 @@ namespace Calculator
 
             string responseMessage = "";
 
-            if (operand.Equals("+"))
+
+            switch (operand)
             {
-                responseMessage = (x + y).ToString();
+                case "+":
+                    responseMessage = (x + y).ToString();
+                    break;
+                case "-":
+                    responseMessage = (x - y).ToString();
+                    break;
+                case "*":
+                    responseMessage = (x*y).ToString();
+                    break;
+                case "/":
+                    responseMessage = (x / y).ToString();
+                    break;
+                case "%":
+                    responseMessage = (x % y).ToString();
+                    break;
+                default:
+                    responseMessage = "Incorrect operator assignment";
+                    break;
             }
-            else if(operand.Equals("-"))
-            {
-                responseMessage = (x - y).ToString();
-            }
-            else if(operand.Equals("*"))
-            {
-                responseMessage = (x * y).ToString();
-            }
-            else if (operand.Equals("/"))
-            {
-                responseMessage = (x/y).ToString();
-            }
-            else 
-            {
-                responseMessage = "Incorrect operator assignment";
-            }
+
             
             return new OkObjectResult(responseMessage);
         }
