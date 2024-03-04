@@ -34,6 +34,11 @@ namespace Calculator
 
             string responseMessage = "";
 
+            if (y == 0)
+            {
+                responseMessage = "Cannot divide by 0";
+                return new OkObjectResult(responseMessage);
+            }
 
             switch (operand)
             {
